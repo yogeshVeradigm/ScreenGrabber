@@ -1,0 +1,11 @@
+<Window x:Class="DevTestEvidenceCapture.App.Views.ImagePreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Icon="pack://application:,,,/DevTestEvidenceCapture.App;component/Assets/AppIcon.ico"
+        Title="Screenshot Preview" SizeToContent="WidthAndHeight"
+        MaxWidth="1000" MaxHeight="800"
+        WindowStartupLocation="CenterOwner"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        KeyDown="Window_KeyDown">
+    <Image x:Name="PreviewImage" Stretch="Uniform" MaxWidth="980" MaxHeight="760"/>
+</Window>

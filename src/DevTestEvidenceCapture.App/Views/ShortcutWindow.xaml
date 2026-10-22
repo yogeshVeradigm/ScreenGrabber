@@ -1,0 +1,20 @@
+<Window x:Class="DevTestEvidenceCapture.App.Views.ShortcutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Icon="pack://application:,,,/DevTestEvidenceCapture.App;component/Assets/AppIcon.ico"
+        Title="Change Capture Shortcut" SizeToContent="WidthAndHeight" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        PreviewKeyDown="Window_PreviewKeyDown" PreviewKeyUp="Window_PreviewKeyUp">
+    <StackPanel Margin="16" Width="340">
+        <TextBlock TextWrapping="Wrap"
+                   Text="Press the new key combination. It must include Ctrl, Alt, Shift or Win, plus a letter, digit, F1-F12 or Print Screen."/>
+        <Border Margin="0,12,0,0" Padding="8" BorderBrush="#FF8A8A8A" BorderThickness="1" Background="#FFF7F7F7">
+            <TextBlock x:Name="ShortcutText" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+        </Border>
+        <TextBlock x:Name="HintText" Margin="0,6,0,0" Foreground="Gray" FontSize="11" TextWrapping="Wrap"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button x:Name="SaveButton" Content="Save" Padding="12,4" Focusable="False" IsEnabled="False" Click="SaveButton_Click"/>
+            <Button Content="Cancel" Padding="12,4" Margin="8,0,0,0" Focusable="False" Click="CancelButton_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

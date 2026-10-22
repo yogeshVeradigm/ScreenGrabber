@@ -1,0 +1,79 @@
+<Window x:Class="DevTestEvidenceCapture.App.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Icon="pack://application:,,,/DevTestEvidenceCapture.App;component/Assets/AppIcon.ico"
+        xmlns:converters="clr-namespace:DevTestEvidenceCapture.App.Converters"
+        Title="Dev Test Evidence Capture" SizeToContent="Height" Width="480"
+        ResizeMode="CanMinimize">
+    <Window.Resources>
+        <converters:InverseBooleanConverter x:Key="InverseBoolConverter"/>
+    </Window.Resources>
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Ticket / Task"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,4" IsEditable="True"
+                  ItemsSource="{Binding RecentTicketNumbers}"
+                  Text="{Binding TicketNumber, UpdateSourceTrigger=PropertyChanged}"
+                  IsEnabled="{Binding IsSessionActive, Converter={StaticResource InverseBoolConverter}}"
+                  ToolTip="Any ticket or task identifier (e.g. CAMP-253, AB#1234, INC0012345, or a task name), or pick a recent one"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Scenario Name"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,4"
+                 Text="{Binding ScenarioName, UpdateSourceTrigger=PropertyChanged}"
+                 IsEnabled="{Binding IsSessionActive, Converter={StaticResource InverseBoolConverter}}"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Root Folder"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,4" IsReadOnly="True" Text="{Binding RootFolderPath}"/>
+        <Button Grid.Row="3" Grid.Column="2" Content="Browse..." Margin="4,4,0,4" Padding="8,0"
+                Command="{Binding BrowseRootFolderCommand}"/>
+
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,12,0,4">
+            <Button Content="Start Session" Padding="12,4" Command="{Binding StartSessionCommand}"/>
+            <Button Content="Stop Session" Padding="12,4" Margin="8,0,0,0" Command="{Binding StopSessionCommand}"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,8,0,0">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="Status: {0}    Screenshots: {1}">
+                    <Binding Path="StatusText"/>
+                    <Binding Path="ScreenshotCount"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+        <DockPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,4,0,0">
+            <Button DockPanel.Dock="Right" Content="Change..." Padding="8,0" Command="{Binding ChangeShortcutCommand}"
+                    ToolTip="Pick a different global capture shortcut"/>
+            <TextBlock VerticalAlignment="Center">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Capture shortcut: {0}">
+                        <Binding Path="CaptureShortcut"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </DockPanel>
+
+        <CheckBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,8,0,0"
+                  Content="Copy each screenshot to the clipboard"
+                  IsChecked="{Binding CopyToClipboard}"/>
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,8,0,0" Foreground="DarkOrange"
+                   TextWrapping="Wrap" Text="{Binding WarningText}"/>
+    </Grid>
+</Window>

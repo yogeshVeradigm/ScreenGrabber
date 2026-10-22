@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ScenarioMetadata",
+  "description": "Schema for scenario.json, written by Dev Test Evidence Capture into every session folder. This is the durable contract a future tool (e.g. a Claude Code skill) reads to discover a ticket, its scenarios, and their screenshots without needing the app itself.",
+  "type": "object",
+  "required": ["ticketNumber", "scenarioName", "sessionStart", "sessionEnd", "screenshotCount", "screenshots"],
+  "additionalProperties": false,
+  "properties": {
+    "ticketNumber": {
+      "type": "string",
+      "description": "Original ticket number as entered by the user (pre-sanitization)."
+    },
+    "scenarioName": {
+      "type": "string",
+      "description": "Original scenario name as entered by the user (pre-sanitization)."
+    },
+    "sessionStart": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the session was started (or first started, if later resumed)."
+    },
+    "sessionEnd": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the session was explicitly stopped. Null while the session is still Active or Interrupted."
+    },
+    "screenshotCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Always equal to screenshots.length."
+    },
+    "screenshots": {
+      "type": "array",
+      "description": "All screenshots captured in this session, ordered by sequenceNumber ascending.",
+      "items": {
+        "type": "object",
+        "required": ["sequenceNumber", "fileName", "capturedAt"],
+        "additionalProperties": false,
+        "properties": {
+          "sequenceNumber": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "1-based chronological capture order. Immutable once assigned."
+          },
+          "fileName": {
+            "type": "string",
+            "description": "The final filename after any optional renaming (or the original numeric filename, e.g. 01.png, if renaming was skipped)."
+          },
+          "capturedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 timestamp when this screenshot was captured."
+          },
+          "note": {
+            "type": "string",
+            "description": "Optional note the user typed when capturing this screenshot (what was done or observed). Omitted when no note was given."
+          }
+        }
+      }
+    }
+  }
+}

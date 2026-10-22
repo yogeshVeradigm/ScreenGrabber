@@ -1,0 +1,48 @@
+# Build output (includes the ~150 MB self-contained publish exe)
+[Bb]in/
+[Oo]bj/
+[Pp]ublish/
+[Rr]elease/
+[Dd]ebug/
+x64/
+x86/
+[Aa]rtifacts/
+*.pdb
+
+# Visual Studio / Rider / VS Code user state
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.rsuser
+*.DotSettings.user
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Tests and coverage
+[Tt]est[Rr]esults/
+*.trx
+coverage*.json
+coverage*.xml
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/packages/
+
+# Temporary files (the app writes *.tmp before an atomic rename)
+*.tmp
+*.log
+
+# Claude Code: per-user local settings (shared project skills in .claude/skills are committed)
+.claude/settings.local.json
+
+# OS clutter
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

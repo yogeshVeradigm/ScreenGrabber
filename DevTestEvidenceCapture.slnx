@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DevTestEvidenceCapture.App/DevTestEvidenceCapture.App.csproj" />
+    <Project Path="src/DevTestEvidenceCapture.Core/DevTestEvidenceCapture.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DevTestEvidenceCapture.Core.Tests/DevTestEvidenceCapture.Core.Tests.csproj" />
+  </Folder>
+</Solution>
